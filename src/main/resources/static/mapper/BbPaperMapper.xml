@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.BbPaperMapper">
+    <!-- 一对多连表查询 -->
+    <resultMap id="Paper" type="com.example.demo.domain.BbPaperDomain">
+        <id column="paper_id" property="paper_id" javaType="Integer"></id>
+        <result column="box_id" property="box_id" javaType="Integer"></result>
+        <result column="contact" property="contact" javaType="String"></result>
+        <result column="content" property="content" javaType="String"></result>
+        <result column="sex" property="sex" javaType="Integer"></result>
+        <collection property="image" ofType="com.example.demo.domain.BbImageDomain">
+            <id column="image_id" property="image_id" javaType="Integer"></id>
+            <result column="url" property="url" javaType="String"></result>
+            <result column="box_id" property="box_id" javaType="Integer"></result>
+        </collection>
+    </resultMap>
+    <!-- 查询单个 -->
+    <select id="findOne" resultMap="Paper" resultType="com.example.demo.domain.BbPaperDomain" parameterType="Integer">
+        <!-- 查询单个用户的全部盒子-->
+        select * from bb_paper LEFT JOIN bb_image on bb_paper.box_id = bb_image.box_id LEFT JOIN bb_box on bb_paper.box_id = bb_box.box_id where bb_paper.user_id = #{id}
+    </select>
+
+</mapper>

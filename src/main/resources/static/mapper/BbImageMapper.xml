@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.BbImageMapper">
+
+    <!-- 查询单个 -->
+    <select id="findImgAll" resultType="com.example.demo.domain.BbImageDomain">
+        <!-- 查询单个用户的全部盒子-->
+        select * from bb_image where box_id = #{box_id}
+    </select>
+
+    <!-- 插入图片-->
+    <insert id="addImg" parameterType="map">
+       insert into bb_image(url,box_id,create_time) values(#{url},#{box_id},#{create_time})
+    </insert>
+
+</mapper>

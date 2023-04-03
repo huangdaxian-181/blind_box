@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.BbBoxsMapper">
+
+    <!-- 一对多连表查询 -->
+    <resultMap id="AllBox" type="com.example.demo.domain.BbBoxDomain">
+        <id column="box_id" property="box_id" javaType="Integer"></id>
+        <result column="user_id" property="user_id" javaType="Integer"></result>
+        <result column="content" property="content" javaType="String"></result>
+        <result column="sex" property="sex" javaType="Integer"></result>
+        <result column="contact" property="contact" javaType="String"></result>
+        <result column="type" property="type" javaType="Integer"></result>
+        <result column="remark" property="remark" javaType="String"></result>
+        <result column="order_no" property="order_no" javaType="String"></result>
+        <result column="contact_type" property="contact_type" javaType="Integer"></result>
+        <collection property="image" ofType="com.example.demo.domain.BbImageDomain">
+            <id column="image_id" property="image_id" javaType="Integer"></id>
+            <result column="url" property="url" javaType="String"></result>
+            <result column="box_id" property="box_id" javaType="Integer"></result>
+        </collection>
+    </resultMap>
+
+    <!-- 查询单个 -->
+    <select id="findUserAll" resultMap="AllBox" resultType="com.example.demo.domain.BbBoxDomain"
+            parameterType="Integer">
+        <!-- 查询单个用户的全部盒子-->
+        select * from bb_box LEFT JOIN bb_image on bb_box.box_id = bb_image.box_id where bb_box.is_delete = 0 and user_id = #{id} and status =
+        #{type} order by bb_box.create_time desc
+    </select>
+
+
+    <!-- 添加用户发送的纸条 -->
+    <insert id="addBox" parameterType="map" useGeneratedKeys="true" keyProperty="box_id">
+        insert into bb_box(user_id,content,sex,contact,type,status,contact_type,life,address,order_no,create_time)
+        values(#{user_id},#{content},#{sex},#{contact},#{type},#{status},#{contact_type},#{life},#{address},#{order_no},#{create_time})
+    </insert>
+
+    <!-- 软删除-->
+    <update id="delBox" parameterType="int">
+        update bb_box set is_delete = 1 where box_id = #{box_id}
+    </update>
+
+</mapper>
