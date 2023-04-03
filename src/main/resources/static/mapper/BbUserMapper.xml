@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.BbUserMapper">
+
+    <!-- 查询单个 -->
+    <select id="findOneUser" resultType="com.example.demo.domain.BbUserDomain">
+        <!-- 查询单个用户的手机号是否存在数据表-->
+        select * from bb_user where phone = '${phone}'
+    </select>
+
+
+    <!-- 添加用户信息加入数据库-->
+    <insert id="addUser" parameterType="map">
+        insert into bb_user(phone,create_time,pwd) values(#{phone},#{create_time},#{pwd})
+    </insert>
+
+    <!-- 查询用户详细信息-->
+    <select id="userInfo" resultType="com.example.demo.domain.BbUserDomain">
+        select * from bb_user where user_id = #{userId}
+    </select>
+
+    <!--扣除余额-->
+    <update id="subtract" parameterType="map">
+        update bb_user set rewards = rewards-#{money} where user_id = #{userId}
+    </update>
+</mapper>

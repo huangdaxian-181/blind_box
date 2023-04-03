@@ -1,0 +1,19 @@
+###################################### MyBatis 配置######################################
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/bb?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+
+mybatis:
+  # 指定 mapper.xml 的位置
+  mapper-locations: classpath:static/mapper/*.xml
+  #扫描实体类的位置,在此处指明扫描实体类的包，在 mapper.xml 中就可以不写实体类的全路径名
+  type-aliases-package: com.example.demo.domain
+  configuration:
+    #默认开启驼峰命名法，可以不用设置该属性
+    map-underscore-to-camel-case: true
+
+
+

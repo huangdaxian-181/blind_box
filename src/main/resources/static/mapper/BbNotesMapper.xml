@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.BbNotesMapper">
+    <!-- 添加用户信息加入数据库-->
+    <insert id="addNotes" parameterType="map">
+        insert into bb_notes(user_id,money,type,notes_type,create_time) values(#{user_id},#{money},#{type},#{notes_type},#{createTime})
+    </insert>
+
+    <!-- 查询用户的提现记录-->
+    <select id = "withdrawalList" resultType="com.example.demo.domain.BbNotesDomain">
+        select * from bb_notes where user_id = #{userId} and notes_type = 1
+    </select>
+</mapper>
