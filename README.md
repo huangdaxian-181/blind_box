@@ -3,6 +3,8 @@
 
 项目状态: 开发中(支付平台api接口异常)
 
+开发周期: 30天
+
 技术栈: java(后端接口),php+tp5(后台管理系统),SSM(spring+springboot+mybatis),Maven,Redis,Rabbitmq
 
 简介: 前端页面借用了dcloud插件市场的模版(https://ext.dcloud.net.cn/plugin?id=7205),整体实现思路很简单模仿了摆地摊抽盲盒的思路,
@@ -13,6 +15,11 @@
 匹配机制采用随机百分百概率匹配使用Redis去缓存男女两种性别的纸条池,每个纸条有两种情况,一种是抽取一次就销毁,另一种是不销毁,抽取到第一种即每次判断状态然后修改掉数据库的状态然后然后重新查询出数据放入到纸条池里面
 支付方式成功返回用户纸条信息,超时或退出支付页面视为订单取消就直接消费掉消息
 ![img_2.png](img_2.png)
+
 ![img_3.png](img_3.png)
+
 ![img.png](img.png)
+
 ![img_1.png](img_1.png)
+
+![img_4.png](img_4.png)
